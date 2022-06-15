@@ -1,34 +1,20 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
-import SearchBar from "./SearchBar";
+import Dashboard from "./Dashboard";
+import Error404 from "./Error404";
 
 const App = () => {
-    const [profiles, setProfiles] = useState([])
-    const [selectedProfile, setSelectedProfile] = useState(null)
-
-    useEffect(() => {
-        onTermSubmit('claudeshyaka')
-    }, []);
-
-    const onTermSubmit = async term => {
-        const response = "" 
-
-        setProfiles(response.data.items)
-        setSelectedProfile(response.data.items[0])
-    };
-
-    const onProfileSelect = profile => {
-        setSelectedProfile(profile)
-    }
 
     return (
-        <div className="ui container">
-            <SearchBar onFormSubmit={onTermSubmit}/>
-            <div className="ui grid">
-                <p>Username Info</p>
-            </div>
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route path='/' element={<Dashboard/>}></Route>
+                <Route path='*' element={<Error404/>}></Route>
+            </Routes>
+        </BrowserRouter>
     );
+
 };
 
 export default App;
