@@ -1,8 +1,15 @@
 import React from "react";
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
+
+import './index.css'
+import {Provider as GitHubProvider} from './context/GithubContext'
 import App from './components/App';
 
-ReactDOM.render(
-    <App/>,
-    document.querySelector('#root')
+const container = document.getElementById('root');
+const root = createRoot(container);
+
+root.render(
+    <GitHubProvider>
+        <App/>
+    </GitHubProvider>
 );

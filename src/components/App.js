@@ -1,8 +1,8 @@
 import React from "react";
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
-import Dashboard from "./Dashboard";
-import Error404 from "./Error404";
+import Dashboard from "../pages/Dashboard";
+import Error404 from "../pages/Error404";
 
 const App = () => {
 
