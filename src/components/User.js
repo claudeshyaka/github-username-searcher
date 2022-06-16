@@ -11,8 +11,8 @@ const User = () => {
         <Wrapper className="section-center">
             <UserProfileCard/>
             <UserReposCard/>
-            <HistoryItemsCard/>
             <UserFollowersCard/>
+            <HistoryItemsCard/>
         </Wrapper>
       </section>
     );

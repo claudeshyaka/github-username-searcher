@@ -4,6 +4,7 @@ import { GoRepo, GoGist } from "react-icons/go";
 import { FiUsers, FiUserPlus} from "react-icons/fi";
 
 import {Context as GitHubContext} from '../context/GithubContext';
+import ItemCard from "./ItemCard";
 import mockProfileData from '../context/mockUserProfile';
 
 
@@ -51,23 +52,13 @@ const UserInfo = () => {
     return (
       <Wrapper className="section-center">
         {items.map((item)=> {
-          return <Item key={item.id} {...item}/>
+          return <ItemCard key={item.id} {...item}/>
         })}
       </Wrapper>
     );
 };
 
-const Item = ({ icon, label, value, color}) => {
-  return (
-    <article className='item'>
-      <span className={color}>{icon}</span>
-      <div>
-        <h3>{value}</h3>
-        <p>{label}</p>
-      </div>
-    </article>
-  );
-}
+
 
 
 const Wrapper = styled.section`
@@ -102,22 +93,6 @@ const Wrapper = styled.section`
     p {
       margin-bottom: 0;
       text-transform: capitalize;
-    }
-    .pink {
-      background: #ffe0f0;
-      color: #da4a91;
-    }
-    .green {
-      background: var(--clr-primary-10);
-      color: var(--clr-primary-5);
-    }
-    .purple {
-      background: #e6e6ff;
-      color: #5d55fa;
-    }
-    .yellow {
-      background: #fffbea;
-      color: #f0b429;
     }
   }
 `;
