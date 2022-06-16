@@ -1,29 +1,35 @@
-import React, { useContext, useEffect, useState } from "react"
+// Imports
+import React, { useContext, useState } from "react"
 import styled from "styled-components";
 import { MdSearch } from "react-icons/md";
+
 import {Context as GithubContext} from "../context/GithubContext"
 
+// Fuction compononent
 const SearchBar = () => {
+  
+  // Business Logic
   const {
-    state: {requests},
     fetchUserProfile,
-    fetchRequestsLimit,
     fetchUserFollowers,
+    fetchUserRepos,
   } = useContext(GithubContext);
   
   const [username, setUsername] = useState(""); 
 
-  useEffect(() => fetchRequestsLimit(), []);
-
-  const onSubmtit = (event) => {
+  const onSubmtit = async (event) => {
     event.preventDefault();
-    if(username){
-      fetchUserProfile(username);
-      fetchUserFollowers(username);
-      fetchRequestsLimit();
+
+    if(username) {
+      await Promise.allSettled([
+        fetchUserProfile(username),
+        fetchUserFollowers(username),
+        fetchUserRepos(username),
+      ]);
     }
   };
-  
+
+  // JSX
   return (
       <section className="section">
           <Wrapper className="section-center">
@@ -38,12 +44,12 @@ const SearchBar = () => {
                 <button type="submit">Search</button>
               </div>
             </form>
-            <h3>Requests: {requests}/60</h3>
           </Wrapper>
       </section>
   );
 };
 
+// Styling
 const Wrapper = styled.div`
   position: relative;
   display: grid;
@@ -56,7 +62,7 @@ const Wrapper = styled.div`
     }
   }
   .form-control {
-    background: var(--clr-white);
+    background: var(--clr-grey-10);
     display: grid;
     align-items: center;
     grid-template-columns: auto 1fr auto;
@@ -108,22 +114,22 @@ const Wrapper = styled.div`
   }
   h3 {
     margin-bottom: 0;
-    color: var(--clr-grey-5);
+    color: var(--clr-grey-8);
     font-weight: 400;
   }
 `;
 
-const ErrorWrapper = styled.article`
-  position: absolute;
-  width: 90vw;
-  top: 0;
-  left: 0;
-  transform: translateY(-100%);
-  text-transform: capitalize;
-  p {
-    color: red;
-    letter-spacing: var(--spacing);
-  }
-`;
+// const ErrorWrapper = styled.article`
+//   position: absolute;
+//   width: 90vw;
+//   top: 0;
+//   left: 0;
+//   transform: translateY(-100%);
+//   text-transform: capitalize;
+//   p {
+//     color: red;
+//     letter-spacing: var(--spacing);
+//   }
+// `;
 
 export default SearchBar

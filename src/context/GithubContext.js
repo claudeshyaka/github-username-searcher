@@ -1,85 +1,87 @@
+// Imports
 import createDataContext from './createDataContext'
 import githubApi from '../services/github'
 
-// mock Data
-// import mockProfileData from './mockUserProfile';
-import mockRepos from './mockRepos';
-
-// Add reducer
+// Reducer
 const gitHubReducer = (state, action) => {
     switch (action.type) {
-        case 'fetch_user_profile':
-            return { ...state, profileData: action.payload };
-        case 'fetch_user_repos':
+        case 'fetch_user_profile_success':
+            return { ...state, profileData: action.payload, isValidUser: true };
+        case "add_searched_user":
+            if (state.searchedUsers.some((user) => {
+                return user.id === action.payload.id;
+            })){
+                return state;
+            }
+            return { ...state, searchedUsers: [...state.searchedUsers, action.payload] };            
+        case 'fetch_user_profile_fail':
+            return { ...state, isValidUser: false };
+        case 'fetch_user_repos_success':
             return { ...state, reposData: action.payload };
-        case "fetch_requests_limit":
-            return { ...state, requests: action.payload }; 
-        case "fetch_user_followers":
+        case "fetch_user_followers_success":
             return { ...state, followersData: action.payload };
         default:
             return state;
     }
 };
 
-// Add actions to dispatch
-const fetchUserProfile = (dispatch) => async (username) => {
 
+// Actions
+// Fetch user profile data
+const fetchUserProfile = (dispatch) => async (username) => {
     try {
         const response = await githubApi.get(`/users/${username}`);
-        console.log("User Data:", response);
 
+        // dispatch user profile data.
         dispatch({ 
-            type: 'fetch_user_profile',
+            type: 'fetch_user_profile_success',
             payload: response.data
         });
+
+        // add user profile data to searched user array.
+        dispatch({
+            type: 'add_searched_user',
+            payload: response.data,
+        });
+
     } catch(error) {
-        console.log(error);
+        dispatch({ 
+            type: 'fetch_user_profile_fail',
+        });
     }
 };
 
+// Fetch users followers data
 const fetchUserFollowers = (dispath) => async(username) => {
     try {
         const response = await githubApi.get(`/users/${username}/followers?per_page=50`)
         dispath({
-            type: "fetch_user_followers",
+            type: "fetch_user_followers_success",
             payload: response.data,
-        })
+        });
     } catch (error) {
-        console.log(error);
+        dispath({
+            type: "fetch_user_followers_fail",
+        });
     }
 }
 
-const fetchUserRepos = (dispatch) => () => {
-    const response = mockRepos;
-
-    dispatch({ 
-        type: 'fetch_user_repos',
-        payload: response
-    })
-}
-
-// Get Rate limits 
-const fetchRequestsLimit = (dispatch) => async () =>{
+// Fetch user repos data.
+const fetchUserRepos = (dispatch) => async (username) => {
     try {
-        const { data } = await githubApi.get("/rate_limit");
+        const response = await githubApi.get(`/users/${username}/repos?per_page=50`);
 
-        const { remaining } = data.rate
-        console.log(remaining);
-        
-        if (remaining > 0){
-            dispatch({
-                type: "fetch_requests_limit",
-                payload: remaining,
-            })
-        }
-        else {
-            // throw an error.
-        }
-
+        dispatch({ 
+            type: 'fetch_user_repos_success',
+            payload: response.data
+        });
     } catch (error) {
-        console.log(error)
+        dispatch({ 
+            type: 'fetch_user_repos_fail',
+        });
     }
-}  
+};
+
 
 // export
 export const { Context, Provider } = createDataContext(
@@ -87,14 +89,15 @@ export const { Context, Provider } = createDataContext(
     {
         fetchUserProfile, 
         fetchUserRepos, 
-        fetchRequestsLimit,
         fetchUserFollowers,
     },
     {
         profileData: null, 
-        reposData: null,
-        followersData: null,
+        reposData: [],
+        followersData: [],
+        searchedUsers: [],
         requests: 0,
         loading: false,
+        isValidUser: false,
     }
 )

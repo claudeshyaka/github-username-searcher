@@ -1,33 +1,35 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { GoRepo } from "react-icons/go";
+
 
 import { Context as GithubContext } from '../context/GithubContext';
-import mockFollowersData from "../context/mockFollowersData";
 
-const UserFollowersCard = () => {
+const UserReposCard = () => {
 
   const { 
-    state: { followersData }
-  } = useContext(GithubContext);
-  
-  const followers = followersData!=null ? followersData : mockFollowersData;  
+    state: { reposData }
+  } = useContext(GithubContext);  
 
   return (
     <Wrapper>
-      <div className="followers">
-        {followers.map((follower, index) => {
+      <div className="repos">
+        {/* <h3>Repos items</h3> */}
+        {reposData.map((repo, index) => {
           const {
-            avatar_url, 
+            name, 
             html_url, 
-            login
-          } = follower
+            language,
+          } = repo
 
           return (
             <article key={index}>
-              <img src={avatar_url} alt={login}/>
+              <GoRepo className="icon"/>
               <div>
-                <h4>{login}</h4>
-                <a href={html_url}>{html_url}</a>
+                <a href={html_url}>
+                    <h4>{name}</h4>
+                </a>
+                <span>{language}</span>
               </div>
             </article>
           );
@@ -44,7 +46,7 @@ const Wrapper = styled.article`
   border-bottom-right-radius: var(--radius);
   position: relative;
   &::before {
-    content: 'followers';
+    content: 'Repos';
     position: absolute;
     top: 0;
     left: 0;
@@ -58,7 +60,7 @@ const Wrapper = styled.article`
     letter-spacing: var(--spacing);
     font-size: 1rem;
   }
-  .followers {
+  .repos {
     overflow: scroll;
     height: 260px;
     display: grid;
@@ -74,18 +76,20 @@ const Wrapper = styled.article`
     grid-template-columns: auto 1fr;
     align-items: center;
     column-gap: 1rem;
-    img {
-      height: 100%;
-      width: 45px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
+    .icon {
+        font-size: 1.5rem;
+      }
     h4 {
       margin-bottom: 0;
     }
     a {
-      color: var(--clr-grey-5);
+      color: var(--clr-primary-5);
+      cursor: pointer;
+      &:hover {
+        background: var(--clr-primary-5);
+        color: var(--clr-primary-7);
+      }
     }
   }
 `;
-export default UserFollowersCard;
+export default UserReposCard;

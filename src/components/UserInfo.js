@@ -80,10 +80,10 @@ const Wrapper = styled.section`
   .item {
     border-radius: var(--radius);
     padding: 1rem 2rem;
-    background: var(--clr-white);
+    background: var(--clr-grey-10);
     display: grid;
     grid-template-columns: auto 1fr;
-    column-gap: 3rem;
+    column-gap: 1rem;
     align-items: center;
     span {
       width: 3rem;

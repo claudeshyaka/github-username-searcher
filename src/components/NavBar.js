@@ -4,7 +4,7 @@ import styled from "styled-components";
 const NavBar = () => {
     return (
         <Wrapper>
-            <h4>Github Username Search</h4>
+            <h4>Github User Search</h4>
         </Wrapper>
     );
 };
@@ -12,7 +12,7 @@ const NavBar = () => {
 const Wrapper = styled.nav`
     padding: 1.5rem;
     margin-bottom: 4rem;
-    background: var(--clr-white);
+    background: var(--clr-grey-10);
     text-align: center;
     display: grid;
     grid-template-columns: auto auto 100px;

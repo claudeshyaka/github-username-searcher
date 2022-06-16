@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { MdBusiness, MdLocationOn, MdLink } from 'react-icons/md';
 
 import {Context as GitHubContext} from '../context/GithubContext';
-import mockProfileData from '../context/mockUserProfile';
 
 const UserProfileCard = () => {
 
@@ -17,7 +16,7 @@ const UserProfileCard = () => {
     location,
     bio,
     twitter_username,
-  } = (profileData!= null ? profileData : mockProfileData);
+  } = profileData;
 
   
   return (
@@ -56,7 +55,7 @@ const UserProfileCard = () => {
 
 
 const Wrapper = styled.article`
-background: var(--clr-white);
+background: var(--clr-grey-10);
 padding: 1.5rem 2rem;
 border-top-right-radius: var(--radius);
 border-bottom-left-radius: var(--radius);
@@ -68,7 +67,7 @@ position: relative;
   top: 0;
   left: 0;
   transform: translateY(-100%);
-  background: var(--clr-white);
+  background: var(--clr-grey-10);
   color: var(--clr-grey-5);
   border-top-right-radius: var(--radius);
   border-top-left-radius: var(--radius);

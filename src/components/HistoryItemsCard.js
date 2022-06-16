@@ -1,34 +1,37 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 
 import { Context as GithubContext } from '../context/GithubContext';
-import mockFollowersData from "../context/mockFollowersData";
+// import mockFollowersData from "../context/mockFollowersData";
 
-const UserFollowersCard = () => {
+const HistoryItemsCard = () => {
 
   const { 
-    state: { followersData }
+    state: { searchedUsers },
+    fetchUserProfile,
   } = useContext(GithubContext);
-  
-  const followers = followersData!=null ? followersData : mockFollowersData;  
 
   return (
     <Wrapper>
-      <div className="followers">
-        {followers.map((follower, index) => {
+      <div className="terms">
+        {searchedUsers.map((user, index) => {
           const {
-            avatar_url, 
-            html_url, 
-            login
-          } = follower
+            name,
+            avatar_url,
+            login,
+          } = user
 
           return (
             <article key={index}>
               <img src={avatar_url} alt={login}/>
-              <div>
-                <h4>{login}</h4>
-                <a href={html_url}>{html_url}</a>
-              </div>
+              <a href="#" onClick={(event)=>{
+                event.preventDefault()
+                fetchUserProfile(login)
+              }}>
+                <h4>{name}</h4>
+                <p>{login}</p>
+              </a>
             </article>
           );
         })}
@@ -44,7 +47,7 @@ const Wrapper = styled.article`
   border-bottom-right-radius: var(--radius);
   position: relative;
   &::before {
-    content: 'followers';
+    content: 'searched users';
     position: absolute;
     top: 0;
     left: 0;
@@ -58,7 +61,7 @@ const Wrapper = styled.article`
     letter-spacing: var(--spacing);
     font-size: 1rem;
   }
-  .followers {
+  .terms {
     overflow: scroll;
     height: 260px;
     display: grid;
@@ -86,6 +89,9 @@ const Wrapper = styled.article`
     a {
       color: var(--clr-grey-5);
     }
+    p {
+      margin-bottom: 0;
+    }
   }
 `;
-export default UserFollowersCard;
+export default HistoryItemsCard;

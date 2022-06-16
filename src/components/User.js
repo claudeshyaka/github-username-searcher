@@ -3,12 +3,15 @@ import styled from 'styled-components';
 
 import UserProfileCard from "./UserProfileCard";
 import UserFollowersCard from "./UserFollowersCard";
-
+import HistoryItemsCard from "./HistoryItemsCard";
+import UserReposCard from "./UserReposCard";
 const User = () => {
     return (
       <section className="section">
         <Wrapper className="section-center">
             <UserProfileCard/>
+            <UserReposCard/>
+            <HistoryItemsCard/>
             <UserFollowersCard/>
         </Wrapper>
       </section>
