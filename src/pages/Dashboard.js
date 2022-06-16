@@ -14,7 +14,7 @@ const Dashboard = () => {
   const {
     state: { profileData, isValidUser }
   } = useContext(GithubContext);
-  
+
   return (
     <main>
       <NavBar/>
@@ -23,7 +23,7 @@ const Dashboard = () => {
         {
           (profileData==null) 
           ? <div className="dash">
-              <h1>Hi!<span className="emogi">&#128526;</span></h1>
+              <h1>Hi!</h1>
               <h3>Enter username to start!</h3>
             </div> 
           : <>{ 
