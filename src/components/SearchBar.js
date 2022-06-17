@@ -9,7 +9,6 @@ import useGithubApi from "../hooks/useGithubApi";
 const SearchBar = () => {
   // Business Logic
   const [username, setUsername] = useState(""); 
-
   const [githubRequests] = useGithubApi();
 
   const onSubmtit = (event) => {
@@ -24,11 +23,13 @@ const SearchBar = () => {
   return (
       <section className="section">
           <Wrapper className="section-center">
-            <form onSubmit={onSubmtit}>
+            <form onSubmit={onSubmtit} data-testid="search">
               <div className="form-control">
                 <MdSearch/>
-                <input type="text"
-                  placeholder="Enter github username"
+                <input
+                  data-testid="search-bar"
+                  type="text"
+                  placeholder="Enter Github Username"
                   value={username} 
                   onChange={(event)=> setUsername(event.target.value)} 
                 />

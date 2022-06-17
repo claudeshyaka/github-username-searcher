@@ -12,31 +12,37 @@ import { Context as GithubContext } from '../context/GithubContext';
 const Dashboard = () => {
 
   const {
-    state: { profileData, isValidUser }
+    state: { profileData, isValidUser, remaining },
   } = useContext(GithubContext);
-
+  console.log("Remaing", remaining);
   return (
     <main>
       <NavBar/>
       <SearchBar/>
       <Wrapper>
         {
-          (profileData==null) 
+          (remaining === 0)
           ? <div className="dash">
-              <h1>Hi!</h1>
-              <h3>Enter username to start!</h3>
-            </div> 
-          : <>{ 
-              !isValidUser
-              ? <div className="dash">
-                  <h1>Error 404!</h1>
-                  <h3>User Not Found!</h3> 
-                </div>
-              : <>
-                  <UserInfo/>
-                  <User/>
-                </>
-            }</>
+              <h1>Number of Requests Exceed!</h1>
+              <h3>Please try again in an hour!</h3>
+            </div>
+          :
+            (profileData==null) 
+            ? <div className="dash">
+                <h1>Hi!</h1>
+                <h3>Enter username to start!</h3>
+              </div> 
+            : <>{ 
+                !isValidUser
+                ? <div className="dash">
+                    <h1>Error 404!</h1>
+                    <h3>User Not Found!</h3> 
+                  </div>
+                : <>
+                    <UserInfo/>
+                    <User/>
+                  </>
+              }</>
         }
       </Wrapper>
     </main>

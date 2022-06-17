@@ -1,15 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Error404 = () => {
     return (
         <Wrapper>
             <h1>Error 404</h1>
             <h3>Sorry, page not found!</h3>
-            <Link to="/" className="btn">
+            <a data-testid='back-home' href='/' className='btn'>
                 Back to Home
-            </Link>
+            </a>
         </Wrapper>
     );
 };

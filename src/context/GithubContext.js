@@ -1,6 +1,6 @@
 // Imports
-import createDataContext from './createDataContext'
-import githubApi from '../services/github'
+import createDataContext from './createDataContext';
+import githubApi from '../services/api/github';
 
 // Reducer
 const gitHubReducer = (state, action) => {
@@ -20,6 +20,8 @@ const gitHubReducer = (state, action) => {
             return { ...state, reposData: action.payload };
         case "fetch_user_followers_success":
             return { ...state, followersData: action.payload };
+        case "fetch_rate_limit":
+            return { ...state, remaining: action.payload };
         default:
             return state;
     }
@@ -81,6 +83,21 @@ const fetchUserRepos = (dispatch) => async (username) => {
     }
 };
 
+// Fetch the number of requests left.
+const fetchRateLimit = (dispatch) => async () => {
+    try {
+        const response = await githubApi.get("/rate_limit");
+        console.log(response.data.rate);
+        dispatch({
+            type: "fetch_rate_limit",
+            payload: response.data.rate.remaining,
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 
 // export
 export const { Context, Provider } = createDataContext(
@@ -89,12 +106,14 @@ export const { Context, Provider } = createDataContext(
         fetchUserProfile, 
         fetchUserRepos, 
         fetchUserFollowers,
+        fetchRateLimit,
     },
     {
         profileData: null, 
         reposData: [],
         followersData: [],
         searchedUsers: [],
+        remaining: 0,
         isValidUser: false,
     }
 )

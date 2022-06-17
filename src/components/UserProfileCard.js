@@ -21,14 +21,13 @@ const UserProfileCard = () => {
   
   return (
     <Wrapper>
-
       <header>
         <img src={avatar_url} alt={name}/>
         <div>
           <h4>{name}</h4>
           <p>@{twitter_username || "twitter"}</p>
         </div>
-        <a href={html_url}>follow</a>
+        <a data-testid="user-card" href={html_url}>follow</a>
       </header>
 
       <p className="bio">{bio}</p>
