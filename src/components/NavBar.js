@@ -11,9 +11,9 @@ const NavBar = () => {
     fetchRateLimit,
   } = useContext(GitHubContext);
 
-  // eslint-disable-next-line
   useEffect(() => {
     fetchRateLimit();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // JSX
