@@ -1,18 +1,24 @@
+// Imports
 import React from 'react';
 import styled from 'styled-components';
 
+// Function component
 const Error404 = () => {
-    return (
-        <Wrapper>
-            <h1>Error 404</h1>
-            <h3>Sorry, page not found!</h3>
-            <a data-testid='back-home' href='/' className='btn'>
-                Back to Home
-            </a>
-        </Wrapper>
-    );
+  // business logic
+
+  // JSX
+  return (
+    <Wrapper>
+      <h1>Error 404</h1>
+      <h3>Sorry, page not found!</h3>
+      <a data-testid='back-home' href='/' className='btn'>
+          Back to Home
+      </a>
+    </Wrapper>
+  );
 };
 
+// CSS Styling
 const Wrapper = styled.section`
     min-height: 100vh;
     display: grid;

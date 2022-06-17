@@ -1,14 +1,16 @@
 // Imports
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import styled from "styled-components";
 import { MdSearch } from "react-icons/md";
 
 import useGithubApi from "../hooks/useGithubApi";
+import { Context as GithubContext } from "../context/GithubContext";
 
-// Fuction compononent
+// Function component
 const SearchBar = () => {
-  // Business Logic
+  // business logic
   const [username, setUsername] = useState(""); 
+  const {state: { remaining }} = useContext(GithubContext);
   const [githubRequests] = useGithubApi();
 
   const onSubmtit = (event) => {
@@ -36,12 +38,13 @@ const SearchBar = () => {
                 <button type="submit">Search</button>
               </div>
             </form>
+            <h3>{remaining}/60</h3>
           </Wrapper>
       </section>
   );
 };
 
-// Styling
+// CSS styling
 const Wrapper = styled.div`
   position: relative;
   display: grid;

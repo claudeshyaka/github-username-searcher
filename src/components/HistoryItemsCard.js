@@ -1,15 +1,18 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+// Imports
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 
 import { Context as GithubContext } from '../context/GithubContext';
 import useGithubApi from '../hooks/useGithubApi';
 
+// Function component
 const HistoryItemsCard = () => {
-
+  // business logic
   const { state: { searchedUsers }} = useContext(GithubContext);
   const [githubRequests] = useGithubApi();
 
+  // JSX
   return (
     <Wrapper>
       <div className="terms">
@@ -37,7 +40,8 @@ const HistoryItemsCard = () => {
     </Wrapper>
   );
 };
-  
+
+// CSS styling
 const Wrapper = styled.article`
   background: var(--clr-grey-10);
   border-top-right-radius: var(--radius);
@@ -92,4 +96,5 @@ const Wrapper = styled.article`
     }
   }
 `;
+
 export default HistoryItemsCard;

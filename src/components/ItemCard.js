@@ -1,7 +1,12 @@
+// Imports
 import React from "react";
 import styled from "styled-components";
 
+// Function component
 const ItemCard = ({ icon, label, value, color}) => {
+  // business logic
+
+  //JSX
   return (
     <Wrapper>
       <span className={color}>{icon}</span>
@@ -13,6 +18,7 @@ const ItemCard = ({ icon, label, value, color}) => {
   );
 }
 
+// CSS styling
 const Wrapper = styled.article`
   border-radius: var(--radius);
   padding: 1rem 2rem;

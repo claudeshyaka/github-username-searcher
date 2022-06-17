@@ -8,6 +8,7 @@ const gitHubReducer = (state, action) => {
         case 'fetch_user_profile_success':
             return { ...state, profileData: action.payload, isValidUser: true };
         case "add_searched_user":
+            // check if user is already in (searchedUsers) the history store 
             if (state.searchedUsers.some((user) => {
                 return user.id === action.payload.id;
             })){
@@ -20,7 +21,7 @@ const gitHubReducer = (state, action) => {
             return { ...state, reposData: action.payload };
         case "fetch_user_followers_success":
             return { ...state, followersData: action.payload };
-        case "fetch_rate_limit":
+        case "fetch_rate_limit_success":
             return { ...state, remaining: action.payload };
         default:
             return state;
@@ -61,6 +62,7 @@ const fetchUserFollowers = (dispath) => async(username) => {
             payload: response.data,
         });
     } catch (error) {
+        // TODO: Add reducer
         dispath({
             type: "fetch_user_followers_fail",
         });
@@ -77,6 +79,7 @@ const fetchUserRepos = (dispatch) => async (username) => {
             payload: response.data
         });
     } catch (error) {
+        // TODO: Add reducer 
         dispatch({ 
             type: 'fetch_user_repos_fail',
         });
@@ -87,14 +90,17 @@ const fetchUserRepos = (dispatch) => async (username) => {
 const fetchRateLimit = (dispatch) => async () => {
     try {
         const response = await githubApi.get("/rate_limit");
-        console.log(response.data.rate);
+        
         dispatch({
-            type: "fetch_rate_limit",
+            type: "fetch_rate_limit_success",
             payload: response.data.rate.remaining,
         });
 
     } catch (error) {
-        console.log(error);
+        // TODO: Add reducer
+        dispatch({ 
+            type: 'fetch_rate_limit_fail',
+        });
     }
 };
 

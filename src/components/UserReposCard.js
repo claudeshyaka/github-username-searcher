@@ -1,20 +1,21 @@
+// Imports
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { GoRepo } from "react-icons/go";
 
-
 import { Context as GithubContext } from '../context/GithubContext';
 
+// Function component
 const UserReposCard = () => {
-
+  // business logic
   const { 
     state: { reposData }
   } = useContext(GithubContext);  
 
+  // JSX
   return (
     <Wrapper>
       <div className="repos">
-        {/* <h3>Repos items</h3> */}
         {reposData.map((repo, index) => {
           const {
             name, 
@@ -38,7 +39,8 @@ const UserReposCard = () => {
     </Wrapper>
   );
 };
-  
+
+// CSS styling
 const Wrapper = styled.article`
   background: var(--clr-grey-10);
   border-top-right-radius: var(--radius);

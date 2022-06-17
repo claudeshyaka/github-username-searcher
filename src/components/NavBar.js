@@ -1,14 +1,30 @@
-import React from "react";
+// Imports
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 
+import { Context as GitHubContext } from "../context/GithubContext";
+
+// Function component
 const NavBar = () => {
-    return (
-        <Wrapper>
-            <h4>Github User Search</h4>
-        </Wrapper>
-    );
+  // business logic
+  const {
+    fetchRateLimit,
+  } = useContext(GitHubContext);
+
+  // eslint-disable-next-line
+  useEffect(() => {
+    fetchRateLimit();
+  }, []);
+
+  // JSX
+  return (
+      <Wrapper>
+          <h4>Github User Search</h4>
+      </Wrapper>
+  );
 };
 
+// CSS styling
 const Wrapper = styled.nav`
     padding: 1.5rem;
     margin-bottom: 4rem;

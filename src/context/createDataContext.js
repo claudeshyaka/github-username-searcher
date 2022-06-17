@@ -1,6 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React, {useReducer} from 'react';
 
+// Data store
 export default (reducer, actions, defaultValue) => {
     const Context = React.createContext();
 

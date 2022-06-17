@@ -1,3 +1,4 @@
+// Imports
 import React, { useContext } from "react";
 import styled from 'styled-components';
 import { GoRepo, GoGist } from "react-icons/go";
@@ -5,17 +6,17 @@ import { FiUsers, FiUserPlus} from "react-icons/fi";
 
 import {Context as GitHubContext} from '../context/GithubContext';
 import ItemCard from "./ItemCard";
-import mockProfileData from '../context/mockUserProfile';
 
-
+// Function component
 const UserInfo = () => {
+  // business logic
   const { state: { profileData } } = useContext(GitHubContext);
   const { 
     public_repos, 
     followers, 
     following, 
     public_gists 
-  } = (profileData!= null ? profileData : mockProfileData);
+  } = profileData
 
   const items = [
     {
@@ -48,19 +49,17 @@ const UserInfo = () => {
     },
   ]
 
-  // console.log("User Data is Here", userProfile);
-    return (
-      <Wrapper className="section-center">
-        {items.map((item)=> {
-          return <ItemCard key={item.id} {...item}/>
-        })}
-      </Wrapper>
-    );
+  // JSX
+  return (
+    <Wrapper className="section-center">
+      {items.map((item)=> {
+        return <ItemCard key={item.id} {...item}/>
+      })}
+    </Wrapper>
+  );
 };
 
-
-
-
+// CSS styling
 const Wrapper = styled.section`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

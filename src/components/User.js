@@ -1,3 +1,4 @@
+// Imports
 import React from "react";
 import styled from 'styled-components';
 
@@ -5,19 +6,25 @@ import UserProfileCard from "./UserProfileCard";
 import UserFollowersCard from "./UserFollowersCard";
 import HistoryItemsCard from "./HistoryItemsCard";
 import UserReposCard from "./UserReposCard";
+
+// Function component
 const User = () => {
-    return (
-      <section className="section">
-        <Wrapper className="section-center">
-            <UserProfileCard/>
-            <UserReposCard/>
-            <UserFollowersCard/>
-            <HistoryItemsCard/>
-        </Wrapper>
-      </section>
-    );
+  // business logic
+
+  // JSX
+  return (
+    <section className="section">
+      <Wrapper className="section-center">
+          <UserProfileCard/>
+          <UserReposCard/>
+          <UserFollowersCard/>
+          <HistoryItemsCard/>
+      </Wrapper>
+    </section>
+  );
 };
 
+// CSS styling
 const Wrapper = styled.div`
   padding-top: 2rem;
   display: grid;

@@ -1,21 +1,21 @@
+// Imports
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 
 import { Context as GithubContext } from '../context/GithubContext';
-import mockFollowersData from "../context/mockFollowersData";
 
+// Function components
 const UserFollowersCard = () => {
-
+  // business logic
   const { 
     state: { followersData }
   } = useContext(GithubContext);
-  
-  const followers = followersData!=null ? followersData : mockFollowersData;  
 
+  // JSX
   return (
     <Wrapper>
       <div className="followers">
-        {followers.map((follower, index) => {
+        {followersData.map((follower, index) => {
           const {
             avatar_url, 
             html_url, 
@@ -36,7 +36,8 @@ const UserFollowersCard = () => {
     </Wrapper>
   );
 };
-  
+
+// CSS styling
 const Wrapper = styled.article`
   background: var(--clr-grey-10);
   border-top-right-radius: var(--radius);
@@ -88,4 +89,5 @@ const Wrapper = styled.article`
     }
   }
 `;
+
 export default UserFollowersCard;
