@@ -18,10 +18,14 @@ cd ~/github-username-searcher
 npm i && npm start
 ```
 
+## Live Demo
+
+Follow this [link](https://cheerful-taiyaki-d29ff3.netlify.app/) for a live demo of the application.
+
 ## Tech Stack
 
 The application is developped using [React](https://reactjs.org/), [Hooks](https://reactjs.org/docs/hooks-intro.html) and [Context](https://reactjs.org/docs/context.html).
-A CSS file called index.css and the CSS module styled-components are used as to provide styling to React elements.
+A CSS file called index.css and the CSS module [styled-components](https://styled-components.com/) are used to provide styling to React elements.
 
 ## Github APIs
 
