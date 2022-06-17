@@ -90,12 +90,16 @@ const fetchUserRepos = (dispatch) => async (username) => {
 const fetchRateLimit = (dispatch) => async () => {
     try {
         const response = await githubApi.get("/rate_limit");
-        
-        dispatch({
-            type: "fetch_rate_limit_success",
-            payload: response.data.rate.remaining,
-        });
 
+        if (response.data.rate.remaining > 0) {
+            dispatch({
+                type: "fetch_rate_limit_success",
+                payload: response.data.rate.remaining,
+            });
+        }
+        else {
+            throw Error("Requests Limit exceed!");
+        }
     } catch (error) {
         // TODO: Add reducer
         dispatch({ 
@@ -119,7 +123,7 @@ export const { Context, Provider } = createDataContext(
         reposData: [],
         followersData: [],
         searchedUsers: [],
-        remaining: 0,
+        remaining: -1,
         isValidUser: false,
     }
 )

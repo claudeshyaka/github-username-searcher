@@ -7,7 +7,6 @@ import { Context as GitHubContext } from "../context/GithubContext";
 export default () => {
 
   const {
-    state: { remaining },
     fetchUserProfile,
     fetchUserFollowers,
     fetchUserRepos,
@@ -17,17 +16,12 @@ export default () => {
   // Async function to call actions from the github data context.
   const githubRequests = async (username) => {
   
-    const res = await Promise.allSettled([fetchRateLimit()]);
-
-    if (res[0].status === "fulfilled"){ // Check if Promise has returned  
-      if (remaining > 0) { // Check if number of request has not been exceed
-        await Promise.allSettled([
-          fetchUserProfile(username),
-          fetchUserFollowers(username),
-          fetchUserRepos(username),
-        ]);
-      }
-    }
+    await Promise.allSettled([
+      fetchUserProfile(username),
+      fetchUserFollowers(username),
+      fetchUserRepos(username),
+      fetchRateLimit(),
+    ]);
   }
 
   return [githubRequests];

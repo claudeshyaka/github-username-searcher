@@ -12,7 +12,7 @@ const SearchBar = () => {
   const [username, setUsername] = useState(""); 
   const {state: { remaining }} = useContext(GithubContext);
   const [githubRequests] = useGithubApi();
-
+  
   const onSubmtit = (event) => {
     event.preventDefault();
 
@@ -38,7 +38,7 @@ const SearchBar = () => {
                 <button type="submit">Search</button>
               </div>
             </form>
-            <h3>{remaining}/60</h3>
+            {remaining === 0?<h3>Requests limit reached!</h3>:<></>}
           </Wrapper>
       </section>
   );
@@ -110,7 +110,7 @@ const Wrapper = styled.div`
   h3 {
     margin-bottom: 0;
     color: var(--clr-grey-8);
-    font-weight: 400;
+    font-weight: 200;
   }
 `;
 
