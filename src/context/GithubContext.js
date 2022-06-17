@@ -25,7 +25,6 @@ const gitHubReducer = (state, action) => {
     }
 };
 
-
 // Actions
 // Fetch user profile data
 const fetchUserProfile = (dispatch) => async (username) => {
@@ -96,8 +95,6 @@ export const { Context, Provider } = createDataContext(
         reposData: [],
         followersData: [],
         searchedUsers: [],
-        requests: 0,
-        loading: false,
         isValidUser: false,
     }
 )

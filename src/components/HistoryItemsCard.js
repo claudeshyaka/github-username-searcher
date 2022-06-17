@@ -3,14 +3,12 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 
 import { Context as GithubContext } from '../context/GithubContext';
-// import mockFollowersData from "../context/mockFollowersData";
+import useGithubApi from '../hooks/useGithubApi';
 
 const HistoryItemsCard = () => {
 
-  const { 
-    state: { searchedUsers },
-    fetchUserProfile,
-  } = useContext(GithubContext);
+  const { state: { searchedUsers }} = useContext(GithubContext);
+  const [githubRequests] = useGithubApi();
 
   return (
     <Wrapper>
@@ -26,8 +24,8 @@ const HistoryItemsCard = () => {
             <article key={index}>
               <img src={avatar_url} alt={login}/>
               <a href="#" onClick={(event)=>{
-                event.preventDefault()
-                fetchUserProfile(login)
+                event.preventDefault();
+                githubRequests(login);
               }}>
                 <h4>{name}</h4>
                 <p>{login}</p>

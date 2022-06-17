@@ -1,31 +1,22 @@
 // Imports
-import React, { useContext, useState } from "react"
+import React, { useState } from "react"
 import styled from "styled-components";
 import { MdSearch } from "react-icons/md";
 
-import {Context as GithubContext} from "../context/GithubContext"
+import useGithubApi from "../hooks/useGithubApi";
 
 // Fuction compononent
 const SearchBar = () => {
-  
   // Business Logic
-  const {
-    fetchUserProfile,
-    fetchUserFollowers,
-    fetchUserRepos,
-  } = useContext(GithubContext);
-  
   const [username, setUsername] = useState(""); 
 
-  const onSubmtit = async (event) => {
+  const [githubRequests] = useGithubApi();
+
+  const onSubmtit = (event) => {
     event.preventDefault();
 
     if(username) {
-      await Promise.allSettled([
-        fetchUserProfile(username),
-        fetchUserFollowers(username),
-        fetchUserRepos(username),
-      ]);
+      githubRequests(username)
     }
   };
 
@@ -36,7 +27,7 @@ const SearchBar = () => {
             <form onSubmit={onSubmtit}>
               <div className="form-control">
                 <MdSearch/>
-                <input type="text" 
+                <input type="text"
                   placeholder="Enter github username"
                   value={username} 
                   onChange={(event)=> setUsername(event.target.value)} 
