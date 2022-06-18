@@ -8,10 +8,14 @@ display work done by those users.
 
 ## Getting Started
 
-1. Install node lts
-2. Install create-react-app `npm install -g create-react-app`
+1. Install Node v16 LTS
+2. Open terminal or cmd on windows and run 
+```bash
+node --version
+npm --version
+```
 
-Running the project in local environment
+To Run the application in local environment, open termimal (or cmd on windows) and run 
 ```bash
 git clone git@github.com:claudeshyaka/github-username-searcher.git
 cd ~/github-username-searcher
@@ -22,10 +26,6 @@ npm i && npm start
 
 Follow this [link](https://cheerful-taiyaki-d29ff3.netlify.app/) for a live demo of the application.
 
-## Tech Stack
-
-The application is developped using [React](https://reactjs.org/), [Hooks](https://reactjs.org/docs/hooks-intro.html) and [Context](https://reactjs.org/docs/context.html).
-A CSS file called index.css and the CSS module [styled-components](https://styled-components.com/) are used to provide styling to React elements.
 
 ## Github APIs
 
@@ -35,6 +35,18 @@ A CSS file called index.css and the CSS module [styled-components](https://style
 - [GET /users/{username}/repos](https://api.github.com/users/claudeshyaka/repos?per_page=50)
 - [GET /users/{username}/followers](https://api.github.com/users/claudeshyaka/followers)
 - [GET /rate_limit](https://api.github.com/rate_limit)
+
+## Tech Stack
+
+The application is developped using [React](https://reactjs.org/), [Hooks](https://reactjs.org/docs/hooks-intro.html) and [Context](https://reactjs.org/docs/context.html).
+A CSS file called index.css and the CSS module [styled-components](https://styled-components.com/) are used to provide styling to React elements.
+
+## App Dependencies
+
+- [axios](https://axios-http.com/docs/intro)
+- [react-router-dom](https://v5.reactrouter.com/web/guides/quick-start)
+- [styled-components](https://styled-components.com/)
+- [react-icons](https://react-icons.github.io/react-icons/)
 
 ## Testing
 
