@@ -9,7 +9,7 @@ display work done by those users.
 ## Getting Started
 
 1. Install Node v16 LTS
-2. Open terminal or cmd on windows and run 
+2. Open terminal (or cmd on windows) and run 
 ```bash
 node --version
 npm --version
