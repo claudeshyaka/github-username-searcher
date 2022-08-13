@@ -9,7 +9,7 @@ display work done by those users.
 ## Getting Started
 
 1. Install Node v16 LTS
-2. Open terminal (or cmd on windows) and run 
+2. Open terminal (or cmd on windows) and run the following command to ensure [Node](https://nodejs.org/en/) and [NPM](https://www.npmjs.com/) are properly installed. 
 ```bash
 node --version
 npm --version
